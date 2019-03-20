@@ -14,39 +14,39 @@ import 'typeface-roboto';
 */
 
 const styles = {
-    root: {
-        flexGrow: 1,
-    },
-    bar: {
-        background: '#56a319',
-        position: 'static',
-    },
-    text: {
-        padding: 10,
-        marginLeft: 35,
-        color: 'white',
-        fontWeight: 350
-    },
+  root: {
+    flexGrow: 1
+  },
+  bar: {
+    background: '#56a319',
+    position: 'static'
+  },
+  text: {
+    padding: 10,
+    marginLeft: 35,
+    color: 'white',
+    fontWeight: 350
+  }
 };
 
-const Header = (props) => {
-    const { classes } = props;
+const Header = props => {
+  const { classes } = props;
 
-    return (
-        <div className = {classes.root}>
-            <AppBar className = {classes.bar}>
-                <Toolbar>
-                    <Typography className = {classes.text} variant = "title">
-                        Aseman junatiedot
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-        </div>
-    );
-}
+  return (
+    <div className={classes.root}>
+      <AppBar className={classes.bar}>
+        <Toolbar>
+          <Typography className={classes.text} variant='title'>
+            Aseman junatiedot
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
 
 Header.propTypes = {
-    classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
- 
+
 export default withStyles(styles)(Header);

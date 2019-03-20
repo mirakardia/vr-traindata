@@ -1,4 +1,4 @@
-.searchForm{
+.searchForm {
     margin-top: 40px;
     position: absolute;
     
@@ -16,7 +16,7 @@ input[type=text] {
     padding-left: 10px;
   }
 
-.formLabel{
+.formLabel {
     font-weight: bold;
     margin-left: 45px;
     display:block;
@@ -26,7 +26,7 @@ input[type=text] {
     content: '✖';
 }
 
-.clearButton{
+.clearButton {
     background:none;
     border:none;
     margin-left: 310px;
