@@ -1,4 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project deployed at [https://vr-traindata.netlify.com/](https://vr-traindata.netlify.com/)
+
+## VR-TRAINDATA
+
+Tällä näppärällä pikku sovelluksella voi hakea tietoja juna-asemien saapuvista ja lähtevistä junista.
+
+## Rakenne
+
+components: komponentit otsakkeelle, hakupalkille ja junataulukolle
+styles: sovelluksen tyylitiedostot
+utilities: apufunktioita datan käsittelemiseen ja API-kutsuihin
+
+## Ajatuksia
+
+Kaiken kaikkiaan tämän pikku sovelluksen kehittäminen oli hieno ja opettavainen kokemus, vaikka olosuhteet toteutushetkellä eivät olleet kenties suotuisimmat mahdolliset.
+
+Mikäli projektia haluaisi jatkokehittää, olisi hyödyllistä ottaa käyttöön Redux ja kenties CSS-esiprosessori kuten Sass.
+
+-----
 
 ## Available Scripts
 
