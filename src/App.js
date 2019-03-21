@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
+import Table from './components/Table';
 import 'react-tabs/style/react-tabs.css';
-import ResultTable from './components/ResultTable';
+import {getTrainsForStation, getStations} from './utilities/api.js';
+
+const stationURL = 'https://rata.digitraffic.fi/api/v1/metadata/stations';
+const trainURL = 'https://rata.digitraffic.fi/api/v1/live-trains/station/';
+const parameter = '?minutes_before_departure=420&minutes_after_departure=420&minutes_before_arrival=420&minutes_after_arrival=420';
 
 class App extends Component {
   constructor(props) {
@@ -13,40 +17,34 @@ class App extends Component {
       query: '',
       trains: [],
       currentStation: '',
-      stations: {}
+      stations: {},
     };
     this.saveStations = this.saveStations.bind(this);
   }
 
-  componentDidMount() {
-    axios
-      .get('https://rata.digitraffic.fi/api/v1/metadata/stations')
-      .then(result => {
-        this.saveStations(result.data);
-      });
+  async componentDidMount() {
+    const result = await getStations(stationURL);
+    this.saveStations(result.data);
   }
 
-  handleQueryChange = query => {
+  handleQueryChange = (query) => {
     this.setState({ query: query });
   };
 
   submitSearch = async () => {
-    let temp = this.state.query.trim();
+    const temp = this.state.query.trim();
+    const capitalized = temp.charAt(0).toUpperCase() + temp.slice(1).trim();
+    const station = this.state.stations[capitalized];
 
-    let capitalized = temp.charAt(0).toUpperCase() + temp.slice(1).trim();
-    const response = await axios.get(
-      'https://rata.digitraffic.fi/api/v1/live-trains/station/' +
-      this.state.stations[capitalized] +
-      '?minutes_before_departure=420&minutes_after_departure=420&minutes_before_arrival=420&minutes_after_arrival=420'
-    );
+    const response = await getTrainsForStation(trainURL, station, parameter);
 
     this.setState({ trains: response.data });
     this.setState({ currentStation: capitalized });
   };
 
-  saveStations(data) {
+  saveStations = (data) => {
     for (let i = 0; i < data.length; i++) {
-      let split = data[i].stationName.split(' ');
+      const split = data[i].stationName.split(' ');
 
       if (split[1] === 'asema') {
         let stations = Object.assign({}, this.state.stations);
@@ -69,13 +67,13 @@ class App extends Component {
           handleQueryChange={this.handleQueryChange}
           onSubmit={this.submitSearch}
         />
-        <Tabs className='tabs'>
+        <Tabs className = 'tabs'>
           <TabList>
             <Tab>Saapuvat</Tab>
             <Tab>Lähtevät</Tab>
           </TabList>
           <TabPanel>
-            <ResultTable
+            <Table
               trains={this.state.trains}
               currentStation={this.state.currentStation}
               stations={this.state.stations}
@@ -83,7 +81,7 @@ class App extends Component {
             />
           </TabPanel>
           <TabPanel>
-            <ResultTable
+            <Table
               trains={this.state.trains}
               currentStation={this.state.currentStation}
               stations={this.state.stations}
@@ -92,6 +90,7 @@ class App extends Component {
           </TabPanel>
         </Tabs>
       </div>
+      
     );
   }
 }

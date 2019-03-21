@@ -1,10 +1,9 @@
-.searchForm {
+.form {
     margin-top: 40px;
     position: absolute;
-    
 }
 
-input[type=text] {
+input {
     width: 275px;
     height: 25px;
     border-radius: 4px;
@@ -34,5 +33,4 @@ input[type=text] {
     padding:0;
     cursor: pointer;
     position: relative;
-    
 }
