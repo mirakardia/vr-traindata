@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
-import Table from './components/Table';
+import TrainTable from './components/TrainTable';
 import 'react-tabs/style/react-tabs.css';
-import {getTrainsForStation, getStations} from './utilities/api.js';
+import { getTrainsForStation, getStations } from './utilities/api.js';
 
+/*
+ * @author Jesse Sydänmäki
+ * Github: https://github.com/Pygmicaesar
+ */
+
+// URLs and pieces thereof.
 const stationURL = 'https://rata.digitraffic.fi/api/v1/metadata/stations';
 const trainURL = 'https://rata.digitraffic.fi/api/v1/live-trains/station/';
 const parameter = '?minutes_before_departure=420&minutes_after_departure=420&minutes_before_arrival=420&minutes_after_arrival=420';
@@ -19,19 +25,29 @@ class App extends Component {
       currentStation: '',
       stations: {},
     };
-    this.saveStations = this.saveStations.bind(this);
   }
 
+  /* Fetch stations from the API when the component mounts.
+   * Save the stations in component state with saveStations.
+   * The axios function (getStations) used to handle the
+   * HTTP request is imported from api.js in the 'utilities' folder.
+   */ 
   async componentDidMount() {
     const result = await getStations(stationURL);
     this.saveStations(result.data);
   }
 
-  handleQueryChange = (query) => {
+  // Handles saving the current query in the component state.
+  handleQueryChange = query => {
     this.setState({ query: query });
   };
 
-  saveStations = (data) => {
+  /* Some of the station names have some ugly looking
+   * parts like 'asema' etc. This method parses the
+   * names to make them prettier in the table. It then
+   * saves the stations in the component state.
+   */
+  saveStations = data => {
     for (let i = 0; i < data.length; i++) {
       const split = data[i].stationName.split(' ');
 
@@ -47,6 +63,10 @@ class App extends Component {
     }
   }
 
+  /* Fetches a train list when the user submits their query.
+   * The axios function (getTrainsForStation) used to handle 
+   * the HTTP request is imported from api.js in the 'utilities' folder. 
+   */
   submitSearch = async () => {
     const temp = this.state.query.trim();
     const capitalized = temp.charAt(0).toUpperCase() + temp.slice(1).trim();
@@ -73,7 +93,7 @@ class App extends Component {
             <Tab>Lähtevät</Tab>
           </TabList>
           <TabPanel>
-            <Table
+            <TrainTable
               trains={this.state.trains}
               currentStation={this.state.currentStation}
               stations={this.state.stations}
@@ -81,7 +101,7 @@ class App extends Component {
             />
           </TabPanel>
           <TabPanel>
-            <Table
+            <TrainTable
               trains={this.state.trains}
               currentStation={this.state.currentStation}
               stations={this.state.stations}

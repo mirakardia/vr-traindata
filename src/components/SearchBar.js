@@ -1,7 +1,15 @@
 import React from 'react';
 import '../style/SearchBar.css';
 
-const SearchBar = (props) => {
+/*
+ * @author Jesse Sydänmäki
+ * Github: https://github.com/Pygmicaesar
+ * 
+ * A simple search bar.
+ * 
+ */
+
+const SearchBar = props => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -16,7 +24,7 @@ const SearchBar = (props) => {
           className = 'input'
           type = 'text'
           value = {props.query}
-          onChange = {(event) => props.handleQueryChange(event.target.value)}
+          onChange = {event => props.handleQueryChange(event.target.value)}
         />
       </form>
       <button

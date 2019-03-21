@@ -1,8 +1,16 @@
 import React from 'react';
 import '../style/Table.css';
-import {parseTrainData, compare} from '../utilities/dataParsers';
+import { parseTrainData, compare } from '../utilities/dataParsers';
 
-const ResultTable = props => {
+/*
+ * @author Jesse Sydänmäki
+ * Github: https://github.com/Pygmicaesar
+ * 
+ * A component for visualizing the fetched
+ * train data in a handy table.
+ */
+
+const TrainTable = props => {
   let data = [];
 
   data = parseTrainData(props.trains, props.stations, props.currentStation, props.arrival);
@@ -56,4 +64,4 @@ const ResultTable = props => {
   );
 };
 
-export default ResultTable;
+export default TrainTable;

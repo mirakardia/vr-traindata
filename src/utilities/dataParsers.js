@@ -1,8 +1,23 @@
+/*
+ * @author Jesse Sydänmäki
+ * Github: https://github.com/Pygmicaesar
+ * 
+ * A file for storing utility functions for data parsing
+ * .
+ */
+
+/* Function that parses data fetched from the API and
+ * saves the data in an array which is the returned.
+ * Parameters: an array of trains, a dictionary of stations,
+ * the current station and a boolean that is used to determine
+ * whether the app should display a table of arriving or departing trains.
+ */
 export const parseTrainData = (trains, stations, currentStation, arrival) => {
   let data = [];
   let isArrival = arrival ? "ARRIVAL" : "DEPARTURE";
   let currentTime = new Date();
 
+  // Helps with finding the name associated with station short code. 
   const getStationName = (shortCode, stations) => {
     for (let key in stations) {
       if (stations[key] === shortCode) {
@@ -67,6 +82,9 @@ export const parseTrainData = (trains, stations, currentStation, arrival) => {
   return data;
 };
 
+/* Function that handles sorting an array of trains based on time.
+ * Parameters a and b are objects in the array of trains.
+ */
 export const compare = (a, b) => {
   if (a.time < b.time) {
     return -1;
@@ -76,49 +94,3 @@ export const compare = (a, b) => {
     return 0;
   }
 };
-
-/*
-  for (let i = 0; i < trains.length; i++) {
-    if (
-      trains[i].trainCategory === "Long-distance" ||
-      trains[i].trainCategory === "Commuter"
-    ) {
-      for (let j = 0; j < trains[i].timeTableRows.length; j++) {
-        let scheduledTime = new Date(trains[i].timeTableRows[j].scheduledTime);
-        if (
-          trains[i].timeTableRows[j].stationShortCode ===
-            stations[currentStation] &&
-          trains[i].timeTableRows[j].type === isArrival &&
-          currentTime < scheduledTime
-        ) {
-          let trainObject = {};
-          if (trains[i].trainCategory === "Long-distance") {
-            trainObject["number"] =
-              trains[i].trainType + " " + trains[i].trainNumber;
-          } else {
-            trainObject["number"] =
-              trains[i].commuterLineID + " " + trains[i].trainNumber;
-          }
-
-          trainObject["type"] = trains[i].trainType;
-          trainObject["origin"] = getStationName(
-            trains[i].timeTableRows[0].stationShortCode,
-            stations
-          );
-          trainObject["destination"] = getStationName(
-            trains[i].timeTableRows[trains[i].timeTableRows.length - 1].stationShortCode,
-            stations
-          );
-          trainObject["time"] = scheduledTime;
-          trainObject["cancelled"] = trains[i].timeTableRows[j].cancelled;
-          trainObject["estimatedTime"] =
-            trains[i].timeTableRows[j].liveEstimateTime === undefined
-              ? ""
-              : new Date(trains[i].timeTableRows[j].liveEstimateTime);
-
-          data.push(trainObject);
-        }
-      }
-    }
-  }
-  */
