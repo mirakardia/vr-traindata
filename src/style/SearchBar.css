@@ -1,36 +1,36 @@
 .form {
-    margin-top: 40px;
-    position: absolute;
+  margin-top: 40px;
+  position: absolute;
 }
 
 input {
-    width: 275px;
-    height: 25px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    background-color: #eef3ee;
-    margin-left: 45px;
-    margin-top: 5px;
-    display:block;
-    padding-left: 10px;
-  }
+  width: 275px;
+  height: 25px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #eef3ee;
+  margin-left: 45px;
+  margin-top: 5px;
+  display: block;
+  padding-left: 10px;
+}
 
 .formLabel {
-    font-weight: bold;
-    margin-left: 45px;
-    display:block;
+  font-weight: bold;
+  margin-left: 45px;
+  display: block;
 }
 
 .clearButton:after {
-    content: '✖';
+  content: "✖";
 }
 
 .clearButton {
-    background:none;
-    border:none;
-    margin-left: 310px;
-    margin-top: 67px;
-    padding:0;
-    cursor: pointer;
-    position: relative;
+  background: none;
+  border: none;
+  margin-left: 310px;
+  margin-top: 67px;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
 }
