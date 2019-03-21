@@ -31,17 +31,6 @@ class App extends Component {
     this.setState({ query: query });
   };
 
-  submitSearch = async () => {
-    const temp = this.state.query.trim();
-    const capitalized = temp.charAt(0).toUpperCase() + temp.slice(1).trim();
-    const station = this.state.stations[capitalized];
-
-    const response = await getTrainsForStation(trainURL, station, parameter);
-
-    this.setState({ trains: response.data });
-    this.setState({ currentStation: capitalized });
-  };
-
   saveStations = (data) => {
     for (let i = 0; i < data.length; i++) {
       const split = data[i].stationName.split(' ');
@@ -57,6 +46,17 @@ class App extends Component {
       }
     }
   }
+
+  submitSearch = async () => {
+    const temp = this.state.query.trim();
+    const capitalized = temp.charAt(0).toUpperCase() + temp.slice(1).trim();
+    const station = this.state.stations[capitalized];
+
+    const response = await getTrainsForStation(trainURL, station, parameter);
+
+    this.setState({ trains: response.data });
+    this.setState({ currentStation: capitalized });
+  };
 
   render() {
     return (

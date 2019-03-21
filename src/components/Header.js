@@ -8,17 +8,17 @@ import 'typeface-roboto';
 
 const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   bar: {
     background: '#56a319',
-    position: 'static',
+    position: 'static'
   },
   text: {
     padding: 10,
     marginLeft: 35,
     color: 'white',
-    fontWeight: 350,
+    fontWeight: 350
   }
 };
 
