@@ -7,7 +7,9 @@ Tällä näppärällä pikku sovelluksella voi hakea tietoja juna-asemien saapuv
 ## Rakenne
 
 components: komponentit otsakkeelle, hakupalkille ja junataulukolle
+
 styles: sovelluksen tyylitiedostot
+
 utilities: apufunktioita datan käsittelemiseen ja API-kutsuihin
 
 ## Ajatuksia
